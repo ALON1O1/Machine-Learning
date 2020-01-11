@@ -5,13 +5,10 @@ import java.util.Random;
 import Math.Matrix;
 import Math.Vector;
 
-public class ANNLayer implements Layer{
+public class ANNLayer extends Layer{
 	
-	private float[][] weights;
-	private float[] biases;
-	private ActivationFunction function;
-	
-	private Layer next;
+	protected float[][] weights;
+	protected float[] biases;
 	
 	public ANNLayer(int num_of_inputs, int size, ActivationFunction function) {
 		if(function == null) throw new IllegalArgumentException("function must not be null");
@@ -19,6 +16,7 @@ public class ANNLayer implements Layer{
 		biases = new float[size];
 		this.function = function;
 		next = null;
+		num_of_outputs = size;
 		
 		Random r = new Random();
 		
@@ -28,15 +26,6 @@ public class ANNLayer implements Layer{
 				weights[i][j] = r.nextFloat() + r.nextFloat() - 1;
 			}
 		}
-	}
-	
-	public void addLayer(int size, ActivationFunction function, LayerType type) {
-		if(next == null) {
-			switch(type) {
-				case ANN: next = new ANNLayer(weights.length, size, function); break;
-			}
-		}
-		else next.addLayer(size, function, type);
 	}
 	
 	public float[] feedForward(float[] inputs) {

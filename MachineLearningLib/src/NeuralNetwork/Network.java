@@ -10,12 +10,12 @@ public class Network {
 	private Layer layers;
 	private LossFunction function;
 
-	public Network(int[] layers, Layer.LayerType[] layer_types, Layer.ActivationFunction[] activation_functions, int num_of_inputs, LossFunction loss_function) {
+	public Network(int[][] layers, Layer.LayerType[] layer_types, Layer.ActivationFunction[] activation_functions, int num_of_inputs, LossFunction loss_function) {
 		if(layers.length != layer_types.length || layers.length != activation_functions.length) throw new IllegalArgumentException("layers array must be the same size as layer_types array and activation_function array. layers:" + layers.length + " layer_types:" + layer_types.length + " activation_function:" + activation_functions.length);
 		if(num_of_inputs <= 0) throw new IllegalArgumentException("num_of_inputs must be greater than 0. Value is " + num_of_inputs);
 		if(loss_function == null) throw new IllegalArgumentException("loss_function must not be null");
 		switch(layer_types[0]) {
-			case ANN: this.layers = new ANNLayer(num_of_inputs, layers[0], activation_functions[0]);
+			case ANN: this.layers = new ANNLayer(num_of_inputs, layers[0][0], activation_functions[0]);
 		}
 		for(int i = 1 ; i < layers.length ; i++) {
 			this.layers.addLayer(layers[i], activation_functions[i], layer_types[i]);
@@ -46,7 +46,7 @@ public class Network {
 		LossFunction loss_function = LossFunction.Quadratic;
 		
 		
-		Network network = new Network(layers, types, activation_functions, num_of_inputs, loss_function);
+		Network network = new Network(new int[][] {layers}, types, activation_functions, num_of_inputs, loss_function);
 		network.printNetwork();
 		
 		float[] inputs = new float[]{1, 0};
