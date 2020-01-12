@@ -1,16 +1,13 @@
 package NeuralNetwork;
 
 import Math.Vector;
-import NeuralNetwork.Layer.ActivationFunction;
-import NeuralNetwork.Layer.LayerType;
-import NeuralNetwork.Layer.LossFunction;
 
 public class Network {
 	
 	private Layer layers;
 	private LossFunction function;
 
-	public Network(int[][] layers, Layer.LayerType[] layer_types, Layer.ActivationFunction[] activation_functions, int num_of_inputs, LossFunction loss_function) {
+	public Network(int[][] layers, LayerType[] layer_types, ActivationFunction[] activation_functions, int num_of_inputs, LossFunction loss_function) {
 		if(layers.length != layer_types.length || layers.length != activation_functions.length) throw new IllegalArgumentException("layers array must be the same size as layer_types array and activation_function array. layers:" + layers.length + " layer_types:" + layer_types.length + " activation_function:" + activation_functions.length);
 		if(num_of_inputs <= 0) throw new IllegalArgumentException("num_of_inputs must be greater than 0. Value is " + num_of_inputs);
 		if(loss_function == null) throw new IllegalArgumentException("loss_function must not be null");
@@ -40,8 +37,8 @@ public class Network {
 	
 	public static void main(String[] args) {
 		int[] layers = new int[] {2, 1};
-		Layer.LayerType[] types = new Layer.LayerType[] {LayerType.ANN, LayerType.ANN};
-		Layer.ActivationFunction[] activation_functions = new Layer.ActivationFunction[] {ActivationFunction.sigmoid, ActivationFunction.sigmoid};
+		LayerType[] types = new LayerType[] {LayerType.ANN, LayerType.ANN};
+		ActivationFunction[] activation_functions = new ActivationFunction[] {ActivationFunction.sigmoid, ActivationFunction.sigmoid};
 		int num_of_inputs = 2;
 		LossFunction loss_function = LossFunction.Quadratic;
 		

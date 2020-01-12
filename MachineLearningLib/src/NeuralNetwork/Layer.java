@@ -2,16 +2,6 @@ package NeuralNetwork;
 
 public abstract class Layer {
 	
-	enum LayerType{
-		ANN;
-	}
-	enum ActivationFunction{
-		identity, sigmoid;
-	}
-	enum LossFunction{
-		Quadratic
-	}
-	
 	protected Layer next;
 	protected ActivationFunction function;
 	protected int num_of_outputs;
